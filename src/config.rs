@@ -17,7 +17,7 @@ use crate::{
     error::{NeviraideError, NeviraideResult}
 };
 
-#[derive(Debug, Default, Serialize)]
+#[derive(Debug, Serialize)]
 pub struct NeviraideConfig {
     pub basic: BasicConfig,
     pub git:   GitConfig,
@@ -36,24 +36,19 @@ impl NeviraideConfig {
     }
 
     pub fn apply(&self) -> NeviraideResult<()> {
-        let fields = self.get_fields(self);
-
-        for (key, value) in fields {
-            let full_key = key.clone();
-
-            if let Some(_) = value.as_object() {
-                self.apply_recursive(&full_key, &value)?;
-            } else {
-                self.set_var(&full_key, value)?;
-            }
-        }
+        self.apply_recursive("", self)?;
         Ok(())
     }
 
     fn apply_recursive<T: Serialize>(&self, prefix: &str, config: &T) -> NeviraideResult<()> {
         for (key, value) in self.get_fields(config) {
-            let full_key = format!("{}.{}", prefix, key);
-            if let Some(_sub_config) = value.as_object() {
+            let full_key = if prefix.is_empty() {
+                key.clone()
+            } else {
+                format!("{}.{}", prefix, key)
+            };
+
+            if let Some(_) = value.as_object() {
                 self.apply_recursive(&full_key, &value)?;
             } else {
                 self.set_var(&full_key, value)?;

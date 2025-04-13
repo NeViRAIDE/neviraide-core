@@ -2,12 +2,12 @@ use std::fmt::{Display, Formatter, Result as FmtResult};
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Default, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct GitConfig {
     pub gitsigns: GitsignsConfig
 }
 
-#[derive(Debug, Default, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct GitsignsConfig {
     pub enable_g_signs:            bool,
     pub enable_current_line_blame: bool

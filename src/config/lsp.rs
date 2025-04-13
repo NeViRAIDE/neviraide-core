@@ -2,7 +2,7 @@ use std::fmt::{Display, Formatter, Result as FmtResult};
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Default, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct LspConfig {
     pub format_before_save: bool,
     pub inlay_hints:        bool,
@@ -11,12 +11,12 @@ pub struct LspConfig {
     pub diagnostic:         DiagnosticConfig
 }
 
-#[derive(Debug, Default, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct CompletionConfig {
     pub auto: bool
 }
 
-#[derive(Debug, Default, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct DiagnosticConfig {
     pub enable_d_signs: bool,
     pub virtual_text:   bool,

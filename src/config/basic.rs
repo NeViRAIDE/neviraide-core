@@ -7,7 +7,7 @@ use nvim_oxi::{
 };
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Default, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct BasicConfig {
     pub language:              String,
     pub latest_stable_plugins: bool,

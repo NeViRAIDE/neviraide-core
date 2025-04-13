@@ -2,7 +2,7 @@ use std::fmt::{Display, Formatter, Result as FmtResult};
 
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Default, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct UiConfig {
     pub hyde:          bool,
     pub theme:         String,
@@ -15,14 +15,14 @@ pub struct UiConfig {
     pub font:          FontConfig
 }
 
-#[derive(Debug, Default, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct LineNumbersConfig {
     pub auto_switch_relative: bool,
     pub numbers_enabled:      bool,
     pub relative_numbers:     bool
 }
 
-#[derive(Debug, Default, Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct FontConfig {
     pub family: String,
     pub size:   usize
